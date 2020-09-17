@@ -77,3 +77,22 @@ class OnSelectSeatPage extends PageState {
   @override
   List<Object> get props => [ticket];
 }
+
+class OnCheckoutPage extends PageState {
+  final Ticket ticket;
+
+  OnCheckoutPage(this.ticket);
+
+  @override
+  List<Object> get props => [ticket];
+}
+
+class OnSuccessPage extends PageState {
+  final Ticket ticket;
+  final FlutixTransaction transaction;
+
+  OnSuccessPage(this.ticket, this.transaction);
+
+  @override
+  List<Object> get props => [ticket, transaction];
+}

@@ -96,7 +96,16 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                           color: selectedSeats.length > 0
                               ? mainColor
                               : Color(0xFFE4E4E4),
-                          onPressed: () async {},
+                          onPressed: selectedSeats.length > 0
+                              ? () {
+                                  context.bloc<PageBloc>().add(
+                                        GoToCheckoutPage(
+                                          widget.ticket
+                                              .copyWith(seats: selectedSeats),
+                                        ),
+                                      );
+                                }
+                              : null,
                         ),
                       ),
                     ),
