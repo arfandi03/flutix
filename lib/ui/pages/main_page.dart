@@ -38,25 +38,7 @@ class _MainPageState extends State<MainPage> {
           },
           children: <Widget>[
             MoviePage(),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  BlocBuilder<UserBloc, UserState>(
-                      builder: (_, userState) => (userState is UserLoaded)
-                          ? Text(userState.userProfile.name)
-                          : SizedBox()),
-                  RaisedButton(
-                      child: Text("Sign Out"),
-                      onPressed: () {
-                        AuthServices.singOut();
-                      }),
-                ],
-              ),
-            ),
-            // Center(
-            //   child: Text("Ticket"),
-            // ),
+            TicketPage(),
           ],
         ),
         createCustomBottomNavBar(),
