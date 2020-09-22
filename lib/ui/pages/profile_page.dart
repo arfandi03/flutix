@@ -61,10 +61,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                            // Container(
-                            //     width: 150,
-                            //     height: 150,
-                            //     color: Colors.amberAccent),
                             Container(
                               height: 150,
                               width: 150,
@@ -79,40 +75,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 20),
-                              child: Text(
-                                userProfile.name,
-                                style: blackTextFont.copyWith(fontSize: 16),
-                                textAlign: TextAlign.center,
-                              ),
+                            SizedBox(
+                              height: 10,
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: defaultMargin),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    "Available\nBalance",
-                                    style: blackTextFont.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    NumberFormat.currency(
-                                            locale: "id_ID",
-                                            decimalDigits: 0,
-                                            symbol: "IDR ")
-                                        .format(userProfile.balance),
-                                    style: yellowNumberFont.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400),
-                                  )
-                                ],
-                              ),
+                            Text(
+                              userProfile.name,
+                              style: blackTextFont.copyWith(fontSize: 16),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              userProfile.email,
+                              style: greyTextFont.copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.center,
                             ),
                             Container(
                               width: 250,
@@ -129,29 +107,41 @@ class _ProfilePageState extends State<ProfilePage> {
                                     style: whiteTextFont.copyWith(fontSize: 16),
                                   ),
                                   onPressed: () {
-                                    context
-                                        .bloc<PageBloc>()
-                                        .add(GoToTopUpPage(GoToProfilePage()));
+                                    context.bloc<PageBloc>().add(
+                                          GoToTopUpPage(
+                                            GoToProfilePage(),
+                                          ),
+                                        );
                                   }),
                             ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: defaultMargin),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 36,
-                                    width: 36,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Edit Profile",
-                                    style: blackTextFont.copyWith(fontSize: 16),
-                                  ),
-                                ],
+                            GestureDetector(
+                              onTap: () {
+                                context.bloc<PageBloc>().add(
+                                      GoToEditProfilePage(
+                                        (userState as UserLoaded).userProfile,
+                                      ),
+                                    );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: defaultMargin),
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 36,
+                                      width: 36,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Edit Profile",
+                                      style:
+                                          blackTextFont.copyWith(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Padding(
@@ -161,24 +151,34 @@ class _ProfilePageState extends State<ProfilePage> {
                                 thickness: 1,
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: defaultMargin),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    height: 36,
-                                    width: 36,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Change Language",
-                                    style: blackTextFont.copyWith(fontSize: 16),
-                                  ),
-                                ],
+                            GestureDetector(
+                              onTap: () {
+                                context.bloc<PageBloc>().add(
+                                      GoToWalletPage(
+                                        GoToProfilePage(),
+                                      ),
+                                    );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: defaultMargin),
+                                child: Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 36,
+                                      width: 36,
+                                      color: Colors.black,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "My Wallet",
+                                      style:
+                                          blackTextFont.copyWith(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Padding(

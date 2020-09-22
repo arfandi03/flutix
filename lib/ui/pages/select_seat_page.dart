@@ -153,7 +153,7 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                     },
                   );
                 },
-                isEnable: index != 0,
+                isEnable: i != 1 || index != 0,
               ),
             ),
           ),

@@ -39,14 +39,14 @@ class ComingSoonCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              movie.title,
-              style: whiteTextFont.copyWith(
-                fontSize: 16,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+            // Text(
+            //   movie.title,
+            //   style: whiteTextFont.copyWith(
+            //     fontSize: 16,
+            //   ),
+            //   maxLines: 2,
+            //   overflow: TextOverflow.ellipsis,
+            // ),
           ],
         ),
       ),

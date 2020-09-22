@@ -43,6 +43,10 @@ class AuthServices {
     await _auth.signOut();
   }
 
+  static Future<void> resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
   static Stream<User> get userStream => _auth.authStateChanges();
 }
 
