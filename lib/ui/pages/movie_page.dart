@@ -9,8 +9,8 @@ class MoviePage extends StatelessWidget {
           decoration: BoxDecoration(
             color: acientColor1,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(16.5),
+              bottomRight: Radius.circular(16.5),
             ),
           ),
           padding: EdgeInsets.fromLTRB(defaultMargin, 20, defaultMargin, 30),
@@ -120,23 +120,23 @@ class MoviePage extends StatelessWidget {
                 List<Movie> movie = movieState.movies.sublist(0, 10);
 
                 return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: movie.length,
-                    itemBuilder: (_, index) => Container(
-                          margin: EdgeInsets.only(
-                              left: (index == 0) ? defaultMargin : 0,
-                              right: (index == movie.length - 1)
-                                  ? defaultMargin
-                                  : 16),
-                          child: MovieCard(
-                            movie[index],
-                            onTap: () {
-                              context
-                                  .bloc<PageBloc>()
-                                  .add(GoToMovieDetailPage(movie[index]));
-                            },
-                          ),
-                        ));
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movie.length,
+                  itemBuilder: (_, index) => Container(
+                    margin: EdgeInsets.only(
+                        left: (index == 0) ? defaultMargin : 0,
+                        right:
+                            (index == movie.length - 1) ? defaultMargin : 16),
+                    child: MovieCard(
+                      movie[index],
+                      onTap: () {
+                        context
+                            .bloc<PageBloc>()
+                            .add(GoToMovieDetailPage(movie[index]));
+                      },
+                    ),
+                  ),
+                );
               } else {
                 return SpinKitFadingCircle(
                   color: mainColor,

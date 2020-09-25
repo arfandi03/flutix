@@ -130,7 +130,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Container(
                                       height: 36,
                                       width: 36,
-                                      color: Colors.black,
+                                      child: Icon(
+                                        Icons.account_circle,
+                                        color: Colors.black,
+                                        size: 36,
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 10,
@@ -167,7 +171,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Container(
                                       height: 36,
                                       width: 36,
-                                      color: Colors.black,
+                                      child: Icon(
+                                        Icons.account_balance_wallet,
+                                        color: Colors.black,
+                                        size: 36,
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 10,
@@ -200,7 +208,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Container(
                                       height: 36,
                                       width: 36,
-                                      color: Colors.black,
+                                      child: Transform(
+                                        alignment: Alignment.center,
+                                        transform: Matrix4.rotationY(math.pi),
+                                        child: Icon(
+                                          Icons.input,
+                                          color: Colors.black,
+                                          size: 36,
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 10,

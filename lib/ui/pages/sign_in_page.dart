@@ -12,6 +12,7 @@ class _SignInPageState extends State<SignInPage> {
   bool isEmailValid = false;
   bool isPassswordValid = false;
   bool isSignIn = false;
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +37,10 @@ class _SignInPageState extends State<SignInPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  // SizedBox(
-                  //   height: 70,
-                  //   child: Image.asset("assets/logo.png"),
-                  // ),
                   Container(
-                    margin: EdgeInsets.only(top: 0, bottom: 150),
+                    margin: EdgeInsets.only(bottom: 150),
                     child: Text(
-                      "Welcome!",
+                      "Welcome Back!",
                       style: blackTextFont.copyWith(fontSize: 36),
                     ),
                   ),
@@ -72,7 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                       });
                     },
                     controller: passwordController,
-                    obscureText: true,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -92,7 +89,16 @@ class _SignInPageState extends State<SignInPage> {
                         style: greyTextFont.copyWith(
                             fontSize: 12, fontWeight: FontWeight.w400),
                       ),
-                      Checkbox(value: false, onChanged: null),
+                      Checkbox(
+                        value: !_obscureText,
+                        activeColor: acientColor2,
+                        onChanged: (bool value) {
+                          setState(() {
+                            print("object");
+                            _obscureText = !value;
+                          });
+                        },
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -120,6 +126,8 @@ class _SignInPageState extends State<SignInPage> {
                             color: mainColor,
                           )
                         : RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
                             child: Text(
                               "Sign In",
                               style: isEmailValid && isPassswordValid
@@ -134,10 +142,12 @@ class _SignInPageState extends State<SignInPage> {
                                     setState(() {
                                       isSignIn = true;
                                     });
+
                                     SignInSignUpResult result =
                                         await AuthServices.signIn(
                                             emailController.text,
                                             passwordController.text);
+
                                     if (result.userProfile == null) {
                                       setState(() {
                                         isSignIn = false;
@@ -172,12 +182,6 @@ class _SignInPageState extends State<SignInPage> {
               )
             ],
           ),
-          // child: RaisedButton(
-          //   child: Text("Sign In"),
-          //   onPressed: () {
-          //     AuthServices.signIn("example@email.com", "123456");
-          //   },
-          // ),
         ),
       ),
     );

@@ -175,7 +175,9 @@ class TicketViewer extends StatelessWidget {
               .add(GoToTicketDetailPage(sortedTicket[index]));
         },
         child: Container(
-          margin: EdgeInsets.only(top: index == 0 ? 133 : 20),
+          margin: EdgeInsets.only(
+              top: index == 0 ? 133 : 20,
+              bottom: index == sortedTicket.length - 1 ? 90 : 0),
           child: Row(
             children: <Widget>[
               Container(

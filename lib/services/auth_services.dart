@@ -21,7 +21,7 @@ class AuthServices {
 
       return SignInSignUpResult(userProfile: userProfile);
     } catch (e) {
-      return SignInSignUpResult(message: e.toString().split(']')[1].trim());
+      return SignInSignUpResult(message: e.toString());
     }
   }
 
@@ -32,10 +32,11 @@ class AuthServices {
           email: email, password: password);
 
       UserProfile userProfile = await result.user.fromFireStore();
-
+      print("try");
       return SignInSignUpResult(userProfile: userProfile);
     } catch (e) {
-      return SignInSignUpResult(message: e.toString().trim());
+      print("catch");
+      return SignInSignUpResult(message: e.toString());
     }
   }
 

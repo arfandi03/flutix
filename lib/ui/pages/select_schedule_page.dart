@@ -50,99 +50,105 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
             ),
             ListView(
               children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  height: 56,
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(left: defaultMargin),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                            onTap: () {
-                              context
-                                  .bloc<PageBloc>()
-                                  .add(GoToMovieDetailPage(widget.movieDetail));
-                            },
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
+                Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      height: 56,
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(left: defaultMargin),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.bloc<PageBloc>().add(
+                                      GoToMovieDetailPage(widget.movieDetail));
+                                },
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
+                          ),
+                          Center(
+                            child: Text(
+                              "Choose Date\nand Theater",
+                              style: blackTextFont.copyWith(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 30, bottom: 24),
+                      height: 90,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: dates.length,
+                        itemBuilder: (_, index) => Container(
+                          margin: EdgeInsets.only(
+                              left: (index == 0) ? defaultMargin : 0,
+                              right: (index < dates.length - 1)
+                                  ? 16
+                                  : defaultMargin),
+                          child: DateCard(
+                            dates[index],
+                            isSelected: selectedDate == dates[index],
+                            onTap: () {
+                              setState(() {
+                                selectedDate = dates[index];
+                              });
+                            },
                           ),
                         ),
                       ),
-                      Center(
-                        child: Text(
-                          "Choose Date\nand Theater",
-                          style: blackTextFont.copyWith(fontSize: 20),
-                          textAlign: TextAlign.center,
+                    ),
+                    generateTimeTable(),
+                    Container(
+                      width: 250,
+                      height: 46,
+                      margin: EdgeInsets.only(top: 10, bottom: 20),
+                      child: BlocBuilder<UserBloc, UserState>(
+                        builder: (_, userState) => RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Text(
+                            "Continue",
+                            style: isValid
+                                ? whiteNumberFont.copyWith(fontSize: 16)
+                                : greyTextFont.copyWith(fontSize: 16),
+                          ),
+                          color: isValid ? mainColor : Color(0xFFE4E4E4),
+                          onPressed: () async {
+                            if (isValid) {
+                              context.bloc<PageBloc>().add(
+                                    GoToSelectSeatPage(
+                                      Ticket(
+                                          widget.movieDetail,
+                                          selectedTheater,
+                                          DateTime(
+                                              selectedDate.year,
+                                              selectedDate.month,
+                                              selectedDate.day,
+                                              selectedTime),
+                                          randomAlphaNumeric(12).toUpperCase(),
+                                          null,
+                                          (userState as UserLoaded)
+                                              .userProfile
+                                              .name,
+                                          null),
+                                    ),
+                                  );
+                            }
+                          },
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 30, bottom: 24),
-                  height: 90,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: dates.length,
-                    itemBuilder: (_, index) => Container(
-                      margin: EdgeInsets.only(
-                          left: (index == 0) ? defaultMargin : 0,
-                          right:
-                              (index < dates.length - 1) ? 16 : defaultMargin),
-                      child: DateCard(
-                        dates[index],
-                        isSelected: selectedDate == dates[index],
-                        onTap: () {
-                          setState(() {
-                            selectedDate = dates[index];
-                          });
-                        },
                       ),
                     ),
-                  ),
-                ),
-                generateTimeTable(),
-                Container(
-                  width: 250,
-                  height: 46,
-                  margin: EdgeInsets.only(top: 40, bottom: 20),
-                  child: BlocBuilder<UserBloc, UserState>(
-                    builder: (_, userState) => RaisedButton(
-                      child: Text(
-                        "Continue",
-                        style: isValid
-                            ? whiteNumberFont.copyWith(fontSize: 16)
-                            : greyTextFont.copyWith(fontSize: 16),
-                      ),
-                      color: isValid ? mainColor : Color(0xFFE4E4E4),
-                      onPressed: () async {
-                        if (isValid) {
-                          context.bloc<PageBloc>().add(
-                                GoToSelectSeatPage(
-                                  Ticket(
-                                      widget.movieDetail,
-                                      selectedTheater,
-                                      DateTime(
-                                          selectedDate.year,
-                                          selectedDate.month,
-                                          selectedDate.day,
-                                          selectedTime),
-                                      randomAlphaNumeric(12).toUpperCase(),
-                                      null,
-                                      (userState as UserLoaded)
-                                          .userProfile
-                                          .name,
-                                      null),
-                                ),
-                              );
-                        }
-                      },
-                    ),
-                  ),
+                  ],
                 ),
               ],
             )

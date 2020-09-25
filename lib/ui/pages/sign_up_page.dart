@@ -15,6 +15,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController rePasswordController = TextEditingController();
 
+  bool _obscureText = true;
+
   @override
   void initState() {
     super.initState();
@@ -27,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     context
         .bloc<ThemeBloc>()
-        .add(ChangeTheme(ThemeData().copyWith(primaryColor: acientColor1)));
+        .add(ChangeTheme(ThemeData().copyWith(primaryColor: acientColor2)));
 
     return WillPopScope(
       onWillPop: () async {
@@ -149,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextField(
                     controller: passwordController,
-                    obscureText: true,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -163,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextField(
                     controller: rePasswordController,
-                    obscureText: true,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -173,6 +175,28 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   SizedBox(
+                    height: 6,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Show Password ",
+                        style: greyTextFont.copyWith(
+                            fontSize: 12, fontWeight: FontWeight.w400),
+                      ),
+                      Checkbox(
+                        value: !_obscureText,
+                        activeColor: acientColor2,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _obscureText = !value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  SizedBox(
                     height: 30,
                   ),
                   Container(
@@ -180,6 +204,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 46,
                     // margin: EdgeInsets.only(top: 40, bottom: 20),
                     child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
                       child: Text(
                         "Sign In",
                         style: whiteNumberFont.copyWith(fontSize: 16),

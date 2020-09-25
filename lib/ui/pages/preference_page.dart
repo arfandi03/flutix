@@ -108,6 +108,8 @@ class _PreferencePageState extends State<PreferencePage> {
                       height: 46,
                       // margin: EdgeInsets.only(top: 40, bottom: 20),
                       child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
                         child: Text(
                           "Confirm",
                           style: whiteNumberFont.copyWith(fontSize: 16),

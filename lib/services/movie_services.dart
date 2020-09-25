@@ -70,10 +70,21 @@ class MovieServices {
     var response = await client.get(url);
     var data = json.decode(response.body);
 
+    // List crew = (data as Map<String, dynamic>)['crew'];
+    String director = ((data as Map<String, dynamic>)['crew'] as List)
+        .map((e) => (e as Map<String, dynamic>)['name'])
+        .take(1)
+        .toString();
+
+    // List genres = (data as Map<String, dynamic>)['genres'];
+    // genres: genres
+    //         .map((e) => (e as Map<String, dynamic>)['name'].toString())
+
     return ((data as Map<String, dynamic>)['cast'] as List)
         .map((e) => Credit(
             name: (e as Map<String, dynamic>)['name'],
-            profilePath: (e as Map<String, dynamic>)['profile_path']))
+            profilePath: (e as Map<String, dynamic>)['profile_path'],
+            director: director))
         .take(8)
         .toList();
   }

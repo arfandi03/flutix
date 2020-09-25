@@ -7,33 +7,34 @@ class BrowseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      width: 50,
-      child: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          border: Border.all(color: Color(0xFF5F5588), width: 1),
-          borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(
-            image: AssetImage("assets/user_pic.png"),
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10),
+            // border: Border.all(color: mainColor, width: 1),
+            image: DecorationImage(
+              image: AssetImage("assets/$genre.png"),
+              // colorFilter: ColorFilter.mode(acientColor1, BlendMode.color),
+              fit: BoxFit.cover,
+            ),
+            color: mainColor,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              genre,
-              style: blackTextFont.copyWith(
-                fontSize: 12,
-              ),
-            ),
-          ],
+        SizedBox(
+          height: 5,
         ),
-      ),
+        Text(
+          genre,
+          style: blackTextFont.copyWith(
+            fontSize: 12,
+            // color: acientColor1,
+          ),
+        ),
+      ],
     );
   }
 }

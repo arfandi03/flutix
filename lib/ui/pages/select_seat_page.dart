@@ -87,6 +87,8 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                       margin: EdgeInsets.only(top: 20, bottom: 20),
                       child: BlocBuilder<UserBloc, UserState>(
                         builder: (_, userState) => RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           child: Text(
                             "Continue",
                             style: selectedSeats.length > 0
